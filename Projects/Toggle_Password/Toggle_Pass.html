@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="Toggel_Pass.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1 id="heading">Sign In</h1>
+      <div id="form-div">
+        <form method="post">
+          <p>
+            <label for="uname">Username : </label>
+            <br />
+            <input
+              type="text"
+              name="userN"
+              id="uname"
+              autocomplete="current-password"
+            />
+          </p>
+          <p>
+            <label for="password">Password : </label>
+            <br />
+            <input
+              type="password"
+              name="pass"
+              id="password"
+              autocomplete="current-password"
+            />
+            <i class="fa fa-sharp fa-light fa-eye-slash" id="toggle-icon"></i>
+          </p>
+
+          <button type="submit" id="submit" class="submit">Log in</button>
+        </form>
+      </div>
+    </div>
+    <script src="./Toggle_Pass.js"></script>
+  </body>
+</html>

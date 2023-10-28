@@ -1,0 +1,57 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans:wght@300&display=swap'); */
+*{
+    margin: 0%;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.container{
+    width: 100%;
+    height: 50vw;
+    background-color: maroon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.weather_app{
+    color: white;
+}
+.temp{
+    font-size: 4.5rem;
+}
+.location_time{
+    font-size: 1.5rem;
+}
+.condition{
+    margin: 0.5rem;
+    margin-left: 3px;
+    
+}
+
+nav{
+    height: 100px;
+}
+
+.search_area{
+    padding: .2rem 0;
+    /* margin-top: 35%; */
+    /* margin-left: 25%; */
+    outline: none;
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: 1rem;
+    border-bottom: 2px white solid;
+    width: 100%;
+}
+
+nav form button{
+    background-color: white;
+    margin-top: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: .3rem;
+}

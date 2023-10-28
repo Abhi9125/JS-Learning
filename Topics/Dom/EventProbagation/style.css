@@ -1,0 +1,39 @@
+*{
+    margin: 0%;
+    padding : 0%;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+}
+
+.container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+}
+
+.outer{
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+    background-color: bisque;
+}
+
+
+.inner{
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+    background-color: chartreuse;
+}
+
+
