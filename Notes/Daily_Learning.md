@@ -1137,8 +1137,8 @@ buttonThree.addEventListener("mouseover", overdiv3);
 - Capturing Phase: Events are captured from the root to the target element. handler argument for capturing is true.
 - Target Phase: The event reaches the target element.
 - Bubbling Phase: Events bubble up from the target element to the root. Handler argument for bubbling if false
-
-> HTML CODE
+- read more about it -- https://medium.com/@nusrat35/a-deep-dive-into-the-event-propagation-advanced-concept-of-javascript-63a906e389a#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjdkMzM0NDk3NTA2YWNiNzRjZGVlZGFhNjYxODRkMTU1NDdmODM2OTMiLCJ0eXAiOiJKV1QifQ.
+  > HTML CODE
 
 ```HTML
 <!DOCTYPE html>
@@ -1898,6 +1898,50 @@ console.log(address);
 
 > Debouncing in JavaScript is a technique that limits the frequency at which a function is called. It is useful for preventing functions from being called too often, which can improve performance and prevent unnecessary side effects.
 
+```JS
+// Debounce in js
+// 1 . Without debouncing data fetch each time when we hit a key including space
+
+// let count = 0;
+// const getData = () => {
+//   console.log("fetchData..", count++);
+// };
+
+// With debouncing we set a time or delay when that time is completed then data will be fetch, if delay is not completed and user start typing then data not fetch
+// ex- agr depaly 5ms ka hai to user agr 5 ms ka delay krta hi to hi f=data fetch hoga other wise if user delay only 3or4 so data is not fetch.
+// debounce function take two argument 1 is function and second is delay
+let count = 0;
+const getData = () => {
+  console.log("fetchData..", count++);
+};
+
+// const debounce = function (fn, d) {
+//   let timer;
+//   return function () {
+//     let context = this;
+//     args = arguments;
+//     clearTimeout(timer);
+//     timer = setTimeout(() => {
+//       getData.apply(context, arguments);
+//     }, d);
+//   };
+// };
+
+// we can also write above code like below code
+const debounce = function (fn, d) {
+  let timer;
+
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      getData.apply(this, args);
+    }, d);
+  };
+};
+
+const batterFunction = debounce(getData, 300);
+```
+
 ## What is Regular expression in js, why it use , how to create a regular expression.
 
 > Read more link -- https://www.javascripttutorial.net/javascript-regular-expression/
@@ -1938,3 +1982,7 @@ console.log(re.exec(message)); // ['hi']
 // searching string -->  The method str.match(regexp) returns all matches of regexp in the string str.
 // Create a regular expression to match the word "apple".
 ```
+
+# 30/10/2023
+
+- Throttling
