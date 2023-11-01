@@ -1343,14 +1343,16 @@ document.querySelector("#category").addEventListener("click", function (e) {
 - What is promises chaining
 - Advanced Error Handling
 
-> 1. Before promise we used to depend on callback functions which would result in 1.) Callback Hell (Pyramid of doom)
-> 2. Inversion of control is overcome by using promise.
->    2.1) A promise is an object that represents eventual completion/failure of an asynchronous operation.
+1. Before promise we used to depend on callback functions which would result in
 
-    2.2) A promise has 3 states: pending | fulfilled | rejected.
-    2.3) As soon as promise is fulfilled/rejected => It updates the empty object which is assigned undefined in pending state.
-    2.4) A promise resolves only once and it is immutable.
-    2.5) Using .then() we can control when we call the cb(callback) function.
+1.) Callback Hell (Pyramid of doom)
+
+- 2). Inversion of control is overcome by using promise.
+  - 2.1) A promise is an object that represents eventual completion/failure of an asynchronous operation.
+  - 2.2) A promise has 3 states: pending | fulfilled | rejected.
+  - 2.3) As soon as promise is fulfilled/rejected => It updates the empty object which is assigned undefined in pending state.
+  - 2.4) A promise resolves only once and it is immutable.
+  - 2.5) Using .then() we can control when we call the cb(callback) function.
 
 3. To avoid callback hell (Pyramid of doom) => We use promise chaining. This way our code expands vertically instead of horizontally. Chaining is done using '.then()'
 
@@ -1894,54 +1896,6 @@ console.log(age); //25
 console.log(address);
 ```
 
-## What is debouncing in js
-
-> Debouncing in JavaScript is a technique that limits the frequency at which a function is called. It is useful for preventing functions from being called too often, which can improve performance and prevent unnecessary side effects.
-
-```JS
-// Debounce in js
-// 1 . Without debouncing data fetch each time when we hit a key including space
-
-// let count = 0;
-// const getData = () => {
-//   console.log("fetchData..", count++);
-// };
-
-// With debouncing we set a time or delay when that time is completed then data will be fetch, if delay is not completed and user start typing then data not fetch
-// ex- agr depaly 5ms ka hai to user agr 5 ms ka delay krta hi to hi f=data fetch hoga other wise if user delay only 3or4 so data is not fetch.
-// debounce function take two argument 1 is function and second is delay
-let count = 0;
-const getData = () => {
-  console.log("fetchData..", count++);
-};
-
-// const debounce = function (fn, d) {
-//   let timer;
-//   return function () {
-//     let context = this;
-//     args = arguments;
-//     clearTimeout(timer);
-//     timer = setTimeout(() => {
-//       getData.apply(context, arguments);
-//     }, d);
-//   };
-// };
-
-// we can also write above code like below code
-const debounce = function (fn, d) {
-  let timer;
-
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      getData.apply(this, args);
-    }, d);
-  };
-};
-
-const batterFunction = debounce(getData, 300);
-```
-
 ## What is Regular expression in js, why it use , how to create a regular expression.
 
 > Read more link -- https://www.javascripttutorial.net/javascript-regular-expression/
@@ -1983,6 +1937,156 @@ console.log(re.exec(message)); // ['hi']
 // Create a regular expression to match the word "apple".
 ```
 
+## What is debouncing in js
+
+> Debouncing in JavaScript is a technique that limits the frequency at which a function is called. It is useful for preventing functions from being called too often, which can improve performance and prevent unnecessary side effects.
+
+```JS
+// Debounce in js
+// 1 . Without debouncing data fetch each time when we hit a key including space
+
+// let count = 0;
+// const getData = () => {
+//   console.log("fetchData..", count++);
+// };
+
+// With debouncing we set a time or delay when that time is completed then data will be fetch, if delay is not completed and user start typing then data not fetch
+// ex- agr depaly 5ms ka hai to user agr 5 ms ka delay krta hi to hi f=data fetch hoga other wise if user delay only 3or4 so data is not fetch.
+// debounce function take two argument 1 is function and second is delay
+let count = 0;
+const getData = () => {
+  console.log("fetchData..", count++);
+};
+
+// const debounce = function (fn, d) {
+//   let timer;
+//   return function () {
+//     let context = this;
+//     args = arguments;
+//     clearTimeout(timer);
+//     timer = setTimeout(() => {
+//       getData.apply(context, arguments);
+//     }, d);
+//   };
+// };
+
+// --we can also write above code like below code
+const debounce = function (fn, d) {
+  let timer;
+
+  return (...args) => {
+    // The clearTimeout() function returns undefined
+    clearTimeout(timer); // this clearTimeout clear the timer and make it undefined.
+    timer = setTimeout(() => {
+      //  The apply method is used to invoke the getData function with a specific
+      // this context (in this case, the same context as the outer function) and with the args passed as arguments.
+      // this point kr rha hai us object ko jis pe event lga hai.
+      getData.apply(this, args);
+      // we can also directly call the fn function it work same.
+      fn();
+    }, d);
+  };
+};
+
+const batterFunction = debounce(getData, 300);
+
+// -- Another debounce example for button
+let counter = 0;
+function getApi() {
+  console.log(++counter, "Api is calling");
+}
+
+const debounce1 = function (fn, delay) {
+  let timer1;
+
+  return () => {
+    if (timer1) {
+      // The clearTimeout() function returns undefined
+      clearTimeout(timer1);
+    }
+    timer1 = setTimeout(() => {
+      fn();
+    }, delay);
+  };
+};
+
+document
+  .querySelector("#btn")
+  .addEventListener("click", debounce1(getApi, 500));
+```
+
 # 30/10/2023
 
-- Throttling
+- Throttling -- Throttling also use for delaying in function calling or limit the number of function calling, throttle function take two arguments and also return a function.
+
+Code Explainer --
+The throttle() function in your code will be called again when you click the button the second time, even if it is within the delay. This is because the throttle() function is designed to limit the number of times a function is called, but it does not guarantee that the function will only be called once within the delay.
+
+The throttle() function works by maintaining a flag that indicates whether or not the function is currently being called. If the flag is true, the throttle() function will not call the function again until the flag is set to false.
+
+When you click the button the first time, the throttle() function will call the getApi() function. The flag will be set to true, to prevent the getApi() function from being called again until the flag is set to false.
+
+If you click the button again before the delay has passed, the throttle() function will be called again. The flag will still be true, so the throttle() function will not call the getApi() function again. However, the throttle() function will start a new timer. When the timer expires, the flag will be set to false, and the throttle() function will call the getApi() function.
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Throttling</title>
+  </head>
+  <body>
+    <h1>Learning Throttling</h1>
+    <input type="text" id="in" />
+    <input type="button" value="submit" id="btn" />
+    <script src="./throttling.js"></script>
+  </body>
+</html>
+```
+
+```JS
+let count = 0;
+function getApi() {
+  console.log("Api calling...", ++count);
+}
+
+// --Throttle function for button
+const throttle = (fn, delay) => {
+  let flag = false;
+
+  return function () {
+    if (!flag) {
+      fn();
+      flag = false;
+
+      setTimeout(() => (flag = true), delay);
+    }
+  };
+};
+
+document
+  .querySelector("#btn")
+  .addEventListener("click", throttle(getApi, 1500));
+
+// --throttle function for input
+
+const throttle1 = function (fn, delay1) {
+  let flag1 = true;
+
+  return function () {
+    if (flag1) {
+      fn();
+      flag1 = false;
+      setTimeout(() => (flag1 = true), delay1);
+    }
+  };
+};
+document
+  .querySelector("#in")
+  .addEventListener("keyup", throttle1(getApi, 5000));
+```
+
+> Different between Throttle function and debounce function
+
+- IN debounce function call depend on event (key strock). but in throttle function call happening after certain time period.
